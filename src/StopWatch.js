@@ -14,9 +14,11 @@ class StopWatch extends Component {
     }
 
     componentDidMount(){
+        // Set timer to run every second. 
         this.timer = setInterval(() => {
             if(this.state.isRunning){
                 this.setState({
+                    // Add one second to counter every 1000 ms
                     time: this.state.time + 1,
                     isRunning: true
                 })
@@ -25,10 +27,12 @@ class StopWatch extends Component {
     }
 
     componentWillUnmount(){
+        // Clear interval before the compknent unmounts to avoid leaking memory
         clearInterval(this.timer)
     }
 
     handlePause(event){
+
         if(this.state.isRunning) {
             this.setState({
                 isRunning: false
@@ -48,6 +52,7 @@ class StopWatch extends Component {
         })
     }
 
+    // Get Formatted time as mm:ss
     getFormattedTime(){
         var min = this.formatInteger(parseInt(this.state.time/60))
         var sec = this.formatInteger(parseInt(this.state.time%60))
@@ -55,6 +60,8 @@ class StopWatch extends Component {
         return `${min}:${sec}`
     }
 
+
+    // Format integer to be 2 digits long
     formatInteger(n){
         if(n<=9){
             return `0${n}`
